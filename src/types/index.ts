@@ -1,6 +1,13 @@
+export type Gender = 'male' | 'female' | 'both' | 'none';
+export type Stage = 'baby' | 'child' | 'teen' | 'adult' | 'special' | 'tamapet';
+
 export interface Character {
   id: string;
   name: string;
+  gender?: Gender;
+  stage?: Stage;
+  condition?: string;
+  sprite?: string;
 }
 
 export interface Category {
@@ -8,6 +15,12 @@ export interface Category {
   name: string;
   emoji: string;
   characters: Character[];
+}
+
+export interface DeviceVersion {
+  id: string;
+  name: string;
+  categories: Category[];
 }
 
 export type CollectionState = Record<string, boolean>;

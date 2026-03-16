@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CATEGORIES } from './data/characters.ts';
+import { VERSIONS } from './data/characters.ts';
 import { useCollection } from './hooks/useCollection.ts';
 import { getTotalProgress } from './utils/progress.ts';
 import { Header } from './components/Header.tsx';
@@ -8,13 +8,17 @@ import { CategorySection } from './components/CategorySection.tsx';
 
 export default function App() {
   const { collectionState, toggleCharacter, isLoading } = useCollection();
+  const [versionId, setVersionId] = useState('uni');
   const [activeTab, setActiveTab] = useState<string | 'all'>('all');
 
-  const { obtained, total } = getTotalProgress(CATEGORIES, collectionState);
+  const version = VERSIONS.find(v => v.id === versionId);
+  if (!version) return null;
+
+  const { obtained, total } = getTotalProgress(version.categories, collectionState);
 
   const visibleCategories = activeTab === 'all'
-    ? CATEGORIES
-    : CATEGORIES.filter(c => c.id === activeTab);
+    ? version.categories
+    : version.categories.filter(c => c.id === activeTab);
 
   if (isLoading) {
     return <div className="loading">Loading...</div>;
@@ -22,9 +26,23 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header obtained={obtained} total={total} />
+      {VERSIONS.length > 1 && (
+        <div className="version-selector">
+          {VERSIONS.map(v => (
+            <button
+              key={v.id}
+              type="button"
+              className={`version-btn ${v.id === versionId ? 'active' : ''}`}
+              onClick={() => { setVersionId(v.id); setActiveTab('all'); }}
+            >
+              {v.name}
+            </button>
+          ))}
+        </div>
+      )}
+      <Header obtained={obtained} total={total} title={version.name} />
       <CategoryTabs
-        categories={CATEGORIES}
+        categories={version.categories}
         activeId={activeTab}
         onSelect={setActiveTab}
         collectionState={collectionState}

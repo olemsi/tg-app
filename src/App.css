@@ -39,6 +39,34 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 16px);
 }
 
+/* Version selector */
+.version-selector {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--tg-theme-bg-color);
+  border-bottom: 1px solid var(--tg-theme-section-separator-color);
+}
+
+.version-btn {
+  flex: 1;
+  border: 2px solid var(--tg-theme-button-color);
+  background: transparent;
+  color: var(--tg-theme-button-color);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.version-btn.active {
+  background: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+}
+
 /* Header */
 .app-header {
   position: sticky;
@@ -127,7 +155,7 @@ body {
   color: var(--tg-theme-text-color);
   padding: 6px 12px;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
   font-family: inherit;
@@ -177,37 +205,81 @@ body {
 }
 
 .character-item {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  min-height: 44px;
+  border-top: 1px solid var(--tg-theme-section-separator-color);
+  transition: opacity 0.15s;
+}
+
+.character-item.obtained {
+  opacity: 0.5;
+}
+
+.character-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  min-height: 48px;
+  flex: 1;
   border: none;
   background: none;
   color: var(--tg-theme-text-color);
   font-size: 15px;
   cursor: pointer;
   text-align: left;
-  width: 100%;
   font-family: inherit;
-  transition: opacity 0.15s;
-  border-top: 1px solid var(--tg-theme-section-separator-color);
 }
 
-.character-item:active {
+.character-row:active {
   opacity: 0.6;
 }
 
-.character-item.obtained {
-  opacity: 0.55;
+.character-sprite {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  flex-shrink: 0;
 }
 
 .character-check {
   font-size: 18px;
   line-height: 1;
   flex-shrink: 0;
+  width: 32px;
+  text-align: center;
 }
 
 .character-name {
   flex: 1;
+  font-size: 14px;
+}
+
+.character-gender {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.character-obtained-mark {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.character-info-btn {
+  border: none;
+  background: none;
+  font-size: 14px;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: var(--tg-theme-hint-color);
+  flex-shrink: 0;
+}
+
+.character-condition {
+  padding: 0 16px 10px 58px;
+  font-size: 12px;
+  color: var(--tg-theme-hint-color);
+  line-height: 1.4;
 }
