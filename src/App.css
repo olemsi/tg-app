@@ -205,14 +205,14 @@ body {
 }
 
 .character-item {
-  position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   border-top: 1px solid var(--tg-theme-section-separator-color);
   transition: opacity 0.15s;
 }
 
-.character-item.obtained {
+.character-item.obtained .character-name {
   opacity: 0.5;
 }
 
@@ -220,9 +220,10 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 16px;
+  padding: 8px 12px;
   min-height: 48px;
   flex: 1;
+  min-width: 0;
   border: none;
   background: none;
   color: var(--tg-theme-text-color);
@@ -236,6 +237,12 @@ body {
   opacity: 0.6;
 }
 
+.character-check {
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
 .character-sprite {
   width: 32px;
   height: 32px;
@@ -244,27 +251,15 @@ body {
   flex-shrink: 0;
 }
 
-.character-check {
-  font-size: 18px;
-  line-height: 1;
-  flex-shrink: 0;
-  width: 32px;
-  text-align: center;
-}
-
 .character-name {
   flex: 1;
   font-size: 14px;
+  min-width: 0;
 }
 
 .character-gender {
   font-size: 12px;
-  opacity: 0.6;
-}
-
-.character-obtained-mark {
-  font-size: 14px;
-  flex-shrink: 0;
+  opacity: 0.5;
 }
 
 .character-info-btn {
@@ -278,7 +273,8 @@ body {
 }
 
 .character-condition {
-  padding: 0 16px 10px 58px;
+  width: 100%;
+  padding: 0 12px 10px 48px;
   font-size: 12px;
   color: var(--tg-theme-hint-color);
   line-height: 1.4;

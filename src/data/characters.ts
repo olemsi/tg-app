@@ -7,40 +7,7 @@ export const VERSIONS: DeviceVersion[] = [
     id: 'uni',
     name: 'Tamagotchi Uni',
     categories: [
-      // ── Base Game ──────────────────────────────────────
-      {
-        id: 'uni-baby',
-        name: 'Baby',
-        emoji: '\u{1F95A}',
-        characters: [
-          { id: 'uni-yooyutchi', name: 'Yooyutchi', gender: 'male', stage: 'baby', condition: '50% chance of hatching', sprite: `${W}/6/69/UniBaby1.png` },
-          { id: 'uni-niinitchi', name: 'Niinitchi', gender: 'female', stage: 'baby', condition: '50% chance of hatching', sprite: `${W}/7/71/UniBaby2.png` },
-        ],
-      },
-      {
-        id: 'uni-child',
-        name: 'Child',
-        emoji: '\u{1F476}',
-        characters: [
-          { id: 'uni-welcotchi', name: 'Welcotchi', gender: 'male', stage: 'child', condition: 'Happiness above 10 pts', sprite: `${W}/4/45/UniChild2.png` },
-          { id: 'uni-lionetchi', name: 'Lionetchi', gender: 'female', stage: 'child', condition: 'Happiness above 10 pts', sprite: `${W}/2/27/LionetchiUni.png` },
-          { id: 'uni-mitsumarutchi', name: 'Mitsumarutchi', gender: 'male', stage: 'child', condition: 'Happiness below 10 pts', sprite: `${W}/e/ef/MitumarutchiUni.png` },
-          { id: 'uni-otamatchi', name: 'Otamatchi', gender: 'female', stage: 'child', condition: 'Happiness below 10 pts', sprite: `${W}/3/3d/UniChild.png` },
-        ],
-      },
-      {
-        id: 'uni-teen',
-        name: 'Teen',
-        emoji: '\u{1F9D2}',
-        characters: [
-          { id: 'uni-kuriritchi', name: 'Kuriritchi', gender: 'male', stage: 'teen', condition: 'Happiness 15\u201320, OR craft DIY \u226510', sprite: `${W}/1/11/UniTeen3.png` },
-          { id: 'uni-labilatchi', name: 'Labilatchi', gender: 'female', stage: 'teen', condition: 'Happiness 15\u201320, OR craft DIY \u226510', sprite: `${W}/e/e1/LabilatchiSprite.png` },
-          { id: 'uni-gunchitchi', name: 'Gunchitchi', gender: 'male', stage: 'teen', condition: 'Happiness 6\u201314, OR feed snack \u226540', sprite: `${W}/9/9c/Gunchitchi_sprite.png` },
-          { id: 'uni-teftetchi', name: 'Teftetchi', gender: 'female', stage: 'teen', condition: 'Happiness 6\u201314, OR feed snack \u226540', sprite: `${W}/6/69/UniTeen2.png` },
-          { id: 'uni-curltchi', name: 'Curltchi', gender: 'male', stage: 'teen', condition: 'Happiness 0\u20135, OR perfect arcade score \u226515', sprite: `${W}/1/14/UniTeen1.png` },
-          { id: 'uni-tustustchi', name: 'Tustustchi', gender: 'female', stage: 'teen', condition: 'Happiness 0\u20135, OR perfect arcade score \u226515', sprite: `${W}/2/24/TustustchiSprite.png` },
-        ],
-      },
+      // ── Base Game Adults ───────────────────────────────
       {
         id: 'uni-adult-m',
         name: 'Adult \u2642',

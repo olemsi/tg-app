@@ -9,48 +9,39 @@ interface CharacterItemProps {
 }
 
 export function CharacterItem({ character, obtained, onToggle }: CharacterItemProps) {
-  const [expanded, setExpanded] = useState(false);
+  const [showCondition, setShowCondition] = useState(false);
   const gender = getGenderIcon(character.gender);
 
   return (
     <div className={`character-item ${obtained ? 'obtained' : ''}`}>
-      <button
-        type="button"
-        className="character-row"
-        onClick={onToggle}
-      >
-        {character.sprite ? (
+      <button type="button" className="character-row" onClick={onToggle}>
+        <span className="character-check">{obtained ? '\u2705' : '\u2B1C'}</span>
+        {character.sprite && (
           <img
             src={character.sprite}
-            alt={character.name}
+            alt=""
             className="character-sprite"
             loading="lazy"
           />
-        ) : (
-          <span className="character-check">{obtained ? '\u2705' : '\u2B1C'}</span>
         )}
         <span className="character-name">
           {character.name}
           {gender && <span className="character-gender"> {gender}</span>}
         </span>
-        {obtained && character.sprite && <span className="character-obtained-mark">\u2705</span>}
       </button>
       {character.condition && (
-        <>
-          <button
-            type="button"
-            className="character-info-btn"
-            onClick={() => setExpanded(!expanded)}
-            aria-label="Show conditions"
-          >
-            {expanded ? '\u25B2' : '\u2139\uFE0F'}
-          </button>
-          {expanded && (
-            <div className="character-condition">
-              {character.condition}
-            </div>
-          )}
-        </>
+        <button
+          type="button"
+          className="character-info-btn"
+          onClick={() => setShowCondition(!showCondition)}
+        >
+          {showCondition ? '\u25B2' : '\u2139\uFE0F'}
+        </button>
+      )}
+      {showCondition && character.condition && (
+        <div className="character-condition">
+          {character.condition}
+        </div>
       )}
     </div>
   );
