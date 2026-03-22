@@ -13,6 +13,7 @@ export const VERSIONS: DeviceVersion[] = [
         id: 'uni-adult-m',
         name: 'Adult \u2642',
         emoji: '\u{1F9D1}',
+        guideUrl: 'https://i.imgur.com/nMyE1PB.jpg',
         characters: [
           { id: 'uni-mametchi', name: 'Mametchi', gender: 'male', stage: 'adult', condition: 'From Kuriritchi: 0 CM, OR 1\u20133 CM + Go Tama Walk 3\u00D7', sprite: `${S}/c/ce/MametchiUniSprite.png` },
           { id: 'uni-weeptchi', name: 'Weeptchi', gender: 'male', stage: 'adult', condition: 'From Kuriritchi: 1\u20133 care mistakes', sprite: `${S}/a/a2/WeeptchiUniSprite.png` },
@@ -28,6 +29,7 @@ export const VERSIONS: DeviceVersion[] = [
         id: 'uni-adult-f',
         name: 'Adult \u2640',
         emoji: '\u{1F9D1}',
+        guideUrl: 'https://i.imgur.com/KkZBWmN.jpg',
         characters: [
           { id: 'uni-neliatchi', name: 'Neliatchi', gender: 'female', stage: 'adult', condition: 'From Labilatchi: 0 CM, OR 1\u20133 CM + Go Tama Walk 3\u00D7', sprite: `${S}/b/b3/NeliatchiUniSprite.png` },
           { id: 'uni-milktchi', name: 'Milktchi', gender: 'female', stage: 'adult', condition: 'From Labilatchi: 1\u20133 care mistakes', sprite: `${S}/e/eb/MilktchiUniSprite.png` },
