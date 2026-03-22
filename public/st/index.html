@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tamagotchi Tracker — Stats</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #1a1a1a; }
+    .page { max-width: 600px; margin: 0 auto; padding: 24px 16px; }
+    h1 { font-size: 20px; margin-bottom: 16px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .card { background: #fff; border-radius: 12px; padding: 16px; text-align: center; }
+    .card-value { font-size: 28px; font-weight: 700; color: #3390ec; }
+    .card-label { font-size: 12px; color: #999; margin-top: 4px; }
+    .section { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+    .section h2 { font-size: 15px; margin-bottom: 10px; }
+    .row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; }
+    .row:last-child { border-bottom: none; }
+    .row-val { font-weight: 600; }
+    .loading { text-align: center; padding: 40px; color: #999; }
+    .error { text-align: center; padding: 40px; color: #e53935; }
+    a { color: #3390ec; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Tamagotchi Tracker Stats</h1>
+    <div id="content"><div class="loading">Loading...</div></div>
+    <p style="text-align:center;margin-top:16px;font-size:12px;color:#999;">
+      Powered by <a href="https://counter.dev" target="_blank">counter.dev</a>
+    </p>
+  </div>
+  <script>
+    const API = 'https://api.counter.dev';
+    const SITE = '9beed51c-1aab-40c0-9786-5eed18e9c809';
+
+    async function load() {
+      try {
+        const r = await fetch(`${API}/visits/${SITE}?period=30d`);
+        if (!r.ok) throw new Error(r.status);
+        const data = await r.json();
+        render(data);
+      } catch (e) {
+        document.getElementById('content').innerHTML =
+          '<div class="error">Stats unavailable. Check <a href="https://counter.dev" target="_blank">counter.dev dashboard</a>.</div>';
+      }
+    }
+
+    function render(data) {
+      const visits = data.visits || {};
+      const dates = Object.keys(visits).sort();
+      const today = dates[dates.length - 1];
+      const todayVal = today ? visits[today] : 0;
+      const total = dates.reduce((s, d) => s + (visits[d] || 0), 0);
+      const avg = dates.length ? Math.round(total / dates.length) : 0;
+
+      // Last 7 days
+      const last7 = dates.slice(-7);
+
+      // Build referrers / pages if available
+      const pages = data.pages || {};
+      const refs = data.referrers || {};
+
+      let html = `
+        <div class="cards">
+          <div class="card"><div class="card-value">${todayVal}</div><div class="card-label">Today</div></div>
+          <div class="card"><div class="card-value">${total}</div><div class="card-label">30 days</div></div>
+          <div class="card"><div class="card-value">${avg}</div><div class="card-label">Avg/day</div></div>
+        </div>
+        <div class="section">
+          <h2>Last 7 days</h2>
+          ${last7.map(d => `<div class="row"><span>${d}</span><span class="row-val">${visits[d]}</span></div>`).join('')}
+        </div>
+      `;
+
+      if (Object.keys(pages).length) {
+        const sorted = Object.entries(pages).sort((a, b) => b[1] - a[1]).slice(0, 10);
+        html += `<div class="section"><h2>Top pages</h2>${sorted.map(([p, v]) => `<div class="row"><span>${p}</span><span class="row-val">${v}</span></div>`).join('')}</div>`;
+      }
+
+      if (Object.keys(refs).length) {
+        const sorted = Object.entries(refs).sort((a, b) => b[1] - a[1]).slice(0, 10);
+        html += `<div class="section"><h2>Referrers</h2>${sorted.map(([r, v]) => `<div class="row"><span>${r || 'Direct'}</span><span class="row-val">${v}</span></div>`).join('')}</div>`;
+      }
+
+      document.getElementById('content').innerHTML = html;
+    }
+
+    load();
+  </script>
+</body>
+</html>
