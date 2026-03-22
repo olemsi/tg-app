@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { VERSIONS } from './data/characters.ts';
 import { useCharts, getVersionPrefix } from './hooks/useCharts.ts';
 import { useCollection } from './hooks/useCollection.ts';
@@ -8,9 +8,17 @@ import { CategoryTabs } from './components/CategoryTabs.tsx';
 import { CategorySection } from './components/CategorySection.tsx';
 import { ChartSelector } from './components/ChartSelector.tsx';
 
+function loadSaved<T>(key: string, fallback: T): T {
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+  catch { return fallback; }
+}
+
 export default function App() {
-  const [versionId, setVersionId] = useState('uni');
-  const [activeTab, setActiveTab] = useState<string | 'all'>('all');
+  const [versionId, setVersionId] = useState(() => loadSaved('last_version', 'uni'));
+  const [activeTab, setActiveTab] = useState<string | 'all'>(() => loadSaved('last_tab', 'all'));
+
+  useEffect(() => { localStorage.setItem('last_version', JSON.stringify(versionId)); }, [versionId]);
+  useEffect(() => { localStorage.setItem('last_tab', JSON.stringify(activeTab)); }, [activeTab]);
 
   const {
     versionCharts, activeChart, storageKey,
@@ -25,9 +33,13 @@ export default function App() {
 
   const { obtained, total } = getTotalProgress(version.categories, collectionState);
 
-  const visibleCategories = activeTab === 'all'
+  // If saved tab doesn't exist in current version, fall back to 'all'
+  const validTab = activeTab === 'all' || version.categories.some(c => c.id === activeTab)
+    ? activeTab : 'all';
+
+  const visibleCategories = validTab === 'all'
     ? version.categories
-    : version.categories.filter(c => c.id === activeTab);
+    : version.categories.filter(c => c.id === validTab);
 
   if (chartsLoading || collectionLoading) {
     return <div className="loading">Loading...</div>;
@@ -61,7 +73,7 @@ export default function App() {
       <Header obtained={obtained} total={total} title={activeChart?.name || version.name} />
       <CategoryTabs
         categories={version.categories}
-        activeId={activeTab}
+        activeId={validTab}
         onSelect={setActiveTab}
         collectionState={collectionState}
       />
