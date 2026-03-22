@@ -20,7 +20,6 @@ export const VERSIONS: DeviceVersion[] = [
           { id: 'uni-shykutchi', name: 'Shykutchi', gender: 'male', stage: 'adult', condition: 'From Gunchitchi: 2\u20135 care mistakes', sprite: `${S}/3/3b/ShykutchiUniSprite.png` },
           { id: 'uni-bigsmile', name: 'Bigsmile', gender: 'male', stage: 'adult', condition: 'From Gunchitchi: 6+ care mistakes', sprite: `${S}/1/1e/BigsmileUniSprite.png` },
           { id: 'uni-kikitchi', name: 'Kikitchi', gender: 'male', stage: 'adult', condition: 'From Curltchi: 0\u20131 CM, OR 2\u20135 CM + perfect arcade \u226520', sprite: `${S}/0/0c/KikitchiUniSprite.png` },
-          { id: 'uni-unimarutchi-m', name: 'Unimarutchi', gender: 'male', stage: 'adult', condition: 'From Curltchi: 2\u20135 care mistakes', sprite: `${S}/2/26/UnimarutchiUniSprite.png` },
           { id: 'uni-gozarutchi', name: 'Gozarutchi', gender: 'male', stage: 'adult', condition: 'From Curltchi: 6+ care mistakes', sprite: `${S}/6/61/GozarutchiSmartSprite.png` },
         ],
       },
@@ -36,7 +35,6 @@ export const VERSIONS: DeviceVersion[] = [
           { id: 'uni-memetchi', name: 'Memetchi', gender: 'female', stage: 'adult', condition: 'From Teftetchi: 2\u20135 care mistakes', sprite: `${S}/0/04/MemetchiUniSprite.png` },
           { id: 'uni-picochutchi', name: 'Picochutchi', gender: 'female', stage: 'adult', condition: 'From Teftetchi: 6+ care mistakes', sprite: `${S}/3/38/PicochutchiUniSprite.png` },
           { id: 'uni-mimitchi', name: 'Mimitchi', gender: 'female', stage: 'adult', condition: 'From Tustustchi: 0\u20131 CM, OR 2\u20135 CM + perfect arcade \u226520', sprite: `${S}/1/1d/MimitchiUniSprite.png` },
-          { id: 'uni-unimarutchi-f', name: 'Unimarutchi', gender: 'female', stage: 'adult', condition: 'From Tustustchi: 2\u20135 care mistakes', sprite: `${S}/2/26/UnimarutchiUniSprite.png` },
           { id: 'uni-sebiretchi', name: 'Sebiretchi', gender: 'female', stage: 'adult', condition: 'From Tustustchi: 6+ care mistakes', sprite: `${S}/3/37/SebiretchiUniSprite.png` },
         ],
       },
@@ -45,6 +43,7 @@ export const VERSIONS: DeviceVersion[] = [
         name: 'Special',
         emoji: '\u2728',
         characters: [
+          { id: 'uni-unimarutchi', name: 'Unimarutchi', gender: 'both', stage: 'special', condition: 'From Curltchi / Tustustchi: 2\u20135 care mistakes', sprite: `${S}/2/26/UnimarutchiUniSprite.png` },
           { id: 'uni-hypertchi', name: 'Hypertchi', gender: 'male', stage: 'special', condition: 'Gen multiple of 5, Tamaverse marriage, Tama Travel \u22653\u00D7', sprite: `${S}/5/51/HypertchiUniSprite.png` },
           { id: 'uni-bubbletchi', name: 'Bubbletchi', gender: 'female', stage: 'special', condition: 'Gen multiple of 5, Tamaverse marriage, Tama Fashion \u22653 outfits', sprite: `${S}/1/10/BubbletchiUniSprite.png` },
           { id: 'uni-shimasimatchi', name: 'ShimaShimatchi', gender: 'male', stage: 'special', condition: 'Uni\u00D7Uni marriage, craft \u22651 DIY', sprite: `${S}/a/a8/Simasimatchi_Uni_Sprite.png` },
