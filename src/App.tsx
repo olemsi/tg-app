@@ -3,7 +3,7 @@ import { VERSIONS } from './data/characters.ts';
 import { useCharts, getVersionPrefix } from './hooks/useCharts.ts';
 import { useCollection } from './hooks/useCollection.ts';
 import { getTotalProgress } from './utils/progress.ts';
-import { Header } from './components/Header.tsx';
+import { ProgressBar } from './components/ProgressBar.tsx';
 import { CategoryTabs } from './components/CategoryTabs.tsx';
 import { CategorySection } from './components/CategorySection.tsx';
 import { ChartSelector } from './components/ChartSelector.tsx';
@@ -59,32 +59,35 @@ export default function App() {
   return (
     <div className="app">
       <div className="app-sticky-header">
-        {VERSIONS.length > 1 && (
-          <div className="version-dropdown" ref={dropdownRef}>
-            <button
-              type="button"
-              className="version-toggle"
-              onClick={() => setVersionOpen(!versionOpen)}
-            >
-              <span className="version-toggle-name">{version.name}</span>
-              <span className={`version-chevron${versionOpen ? ' open' : ''}`}>&#x25BE;</span>
-            </button>
-            {versionOpen && (
-              <div className="version-menu">
-                {VERSIONS.map(v => (
-                  <button
-                    key={v.id}
-                    type="button"
-                    className={`version-menu-item${v.id === versionId ? ' active' : ''}`}
-                    onClick={() => { setVersionId(v.id); setActiveTab('all'); setVersionOpen(false); }}
-                  >
-                    {v.name}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+        <div className="header-top-row">
+          {VERSIONS.length > 1 && (
+            <div className="version-dropdown" ref={dropdownRef}>
+              <button
+                type="button"
+                className="version-toggle"
+                onClick={() => setVersionOpen(!versionOpen)}
+              >
+                <span className="version-toggle-name">{version.name}</span>
+                <span className={`version-chevron${versionOpen ? ' open' : ''}`}>&#x25BE;</span>
+              </button>
+              {versionOpen && (
+                <div className="version-menu">
+                  {VERSIONS.map(v => (
+                    <button
+                      key={v.id}
+                      type="button"
+                      className={`version-menu-item${v.id === versionId ? ' active' : ''}`}
+                      onClick={() => { setVersionId(v.id); setActiveTab('all'); setVersionOpen(false); }}
+                    >
+                      {v.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+          <ProgressBar obtained={obtained} total={total} />
+        </div>
         <ChartSelector
           charts={versionCharts}
           activeChart={activeChart}
@@ -94,7 +97,6 @@ export default function App() {
           onRename={renameChart}
           onDelete={deleteChart}
         />
-        <Header obtained={obtained} total={total} title={activeChart?.name || version.name} />
         <CategoryTabs
           categories={version.categories}
           activeId={validTab}

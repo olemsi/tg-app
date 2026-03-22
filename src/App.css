@@ -42,7 +42,7 @@ body {
 /* Version dropdown */
 .version-dropdown {
   position: relative;
-  padding: 8px 16px 0;
+  flex-shrink: 0;
 }
 
 .version-toggle {
@@ -218,8 +218,10 @@ body {
   background: var(--tg-theme-bg-color);
 }
 
-/* Header */
-.app-header {
+.header-top-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 8px 16px;
 }
 
