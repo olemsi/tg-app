@@ -304,6 +304,17 @@ body {
   white-space: nowrap;
 }
 
+.category-guide {
+  font-size: 11px;
+  color: var(--tg-theme-button-color);
+  text-decoration: none;
+  padding: 2px 8px;
+  border: 1px solid var(--tg-theme-button-color);
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* Character grid */
 .character-list {
   display: grid;

@@ -11,6 +11,7 @@ export const PARADISE: DeviceVersion = {
       id: 'p-land',
       name: 'Land',
       emoji: '\u{1F33F}',
+      guideUrl: 'https://imgur.com/RY43wgb',
       characters: [
         // Meat cells
         { id: 'p-meowtchi', name: 'Meowtchi', condition: 'Meat cells, 0 care mistakes', sprite: `${S}/8/87/Meowtchi_Neutral_Sprite.png` },
@@ -40,6 +41,7 @@ export const PARADISE: DeviceVersion = {
       id: 'p-water',
       name: 'Water',
       emoji: '\u{1F4A7}',
+      guideUrl: 'https://imgur.com/RY43wgb',
       characters: [
         // Seafood cells
         { id: 'p-irukatchi', name: 'Irukatchi', condition: 'Seafood cells, 0 care mistakes', sprite: `${S}/9/9e/Irukatchi_Paradise_Sprite.png` },
@@ -69,6 +71,7 @@ export const PARADISE: DeviceVersion = {
       id: 'p-sky',
       name: 'Sky',
       emoji: '\u{2601}\u{FE0F}',
+      guideUrl: 'https://imgur.com/RY43wgb',
       characters: [
         // Chicken cells
         { id: 'p-horhotchi', name: 'Horhotchi', condition: 'Chicken cells, 0 care mistakes', sprite: `${S}/1/18/Horhotchi_Paradise_sprite.png` },
@@ -98,6 +101,7 @@ export const PARADISE: DeviceVersion = {
       id: 'p-forest',
       name: 'Forest',
       emoji: '\u{1F332}',
+      guideUrl: 'https://imgur.com/kjfHP3i',
       characters: [
         // Peking Meat cells
         { id: 'p-forest-horhotchi', name: 'Forest Horhotchi', condition: 'Peking Meat cells, 0 care mistakes', sprite: `${S}/0/04/ForestHorhotchi_Paradise_sprite.png` },

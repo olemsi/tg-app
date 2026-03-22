@@ -18,6 +18,11 @@ export function CategorySection({ category, collectionState, onToggle }: Categor
         <span className="category-title">
           {category.emoji} {category.name}
         </span>
+        {category.guideUrl && (
+          <a href={category.guideUrl} target="_blank" rel="noopener noreferrer" className="category-guide">
+            Guide
+          </a>
+        )}
         <ProgressBar obtained={obtained} total={total} />
       </div>
       <div className="character-list">

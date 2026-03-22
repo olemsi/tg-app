@@ -14,6 +14,7 @@ export interface Category {
   id: string;
   name: string;
   emoji: string;
+  guideUrl?: string;
   characters: Character[];
 }
 
