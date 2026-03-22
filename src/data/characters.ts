@@ -1,5 +1,6 @@
 import type { DeviceVersion } from '../types/index.ts';
 import { PARADISE } from './paradise.ts';
+import { SMART } from './smart.ts';
 
 const S = 'https://static.wikia.nocookie.net/tamagotchi/images';
 
@@ -240,6 +241,7 @@ export const VERSIONS: DeviceVersion[] = [
     ],
   },
   PARADISE,
+  SMART,
 ];
 
 export function getVersion(id: string): DeviceVersion | undefined {

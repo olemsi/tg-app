@@ -236,7 +236,8 @@ body {
   top: 79px;
   z-index: 9;
   background: var(--tg-theme-bg-color);
-  border-bottom: 1px solid var(--tg-theme-section-separator-color);
+  margin: 0 8px;
+  border-radius: 0 0 12px 12px;
 }
 
 .tabs {
