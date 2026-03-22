@@ -480,9 +480,9 @@ body {
 }
 
 .card-gender {
-  font-size: 10px;
+  font-size: 9px;
   opacity: 0.4;
-  line-height: 1;
+  font-weight: 600;
 }
 
 .character-card.obtained .card-sprite {
