@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { VERSIONS } from './data/characters.ts';
 import { useCharts, getVersionPrefix } from './hooks/useCharts.ts';
 import { useCollection } from './hooks/useCollection.ts';
@@ -16,9 +16,20 @@ function loadSaved<T>(key: string, fallback: T): T {
 export default function App() {
   const [versionId, setVersionId] = useState(() => loadSaved('last_version', 'uni'));
   const [activeTab, setActiveTab] = useState<string | 'all'>(() => loadSaved('last_tab', 'all'));
+  const [versionOpen, setVersionOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { localStorage.setItem('last_version', JSON.stringify(versionId)); }, [versionId]);
   useEffect(() => { localStorage.setItem('last_tab', JSON.stringify(activeTab)); }, [activeTab]);
+
+  useEffect(() => {
+    if (!versionOpen) return;
+    const close = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) setVersionOpen(false);
+    };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, [versionOpen]);
 
   const {
     versionCharts, activeChart, storageKey,
@@ -48,17 +59,29 @@ export default function App() {
   return (
     <div className="app">
       {VERSIONS.length > 1 && (
-        <div className="version-selector">
-          {VERSIONS.map(v => (
-            <button
-              key={v.id}
-              type="button"
-              className={`version-btn ${v.id === versionId ? 'active' : ''}`}
-              onClick={() => { setVersionId(v.id); setActiveTab('all'); }}
-            >
-              {v.name}
-            </button>
-          ))}
+        <div className="version-dropdown" ref={dropdownRef}>
+          <button
+            type="button"
+            className="version-toggle"
+            onClick={() => setVersionOpen(!versionOpen)}
+          >
+            <span className="version-toggle-name">{version.name}</span>
+            <span className={`version-chevron${versionOpen ? ' open' : ''}`}>&#x25BE;</span>
+          </button>
+          {versionOpen && (
+            <div className="version-menu">
+              {VERSIONS.map(v => (
+                <button
+                  key={v.id}
+                  type="button"
+                  className={`version-menu-item${v.id === versionId ? ' active' : ''}`}
+                  onClick={() => { setVersionId(v.id); setActiveTab('all'); setVersionOpen(false); }}
+                >
+                  {v.name}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
       <ChartSelector
