@@ -2,6 +2,12 @@ import type { DeviceVersion } from '../types/index.ts';
 import { PARADISE } from './paradise.ts';
 import { SMART } from './smart.ts';
 import { PIX } from './pix.ts';
+import { MIX } from './mix.ts';
+import { ON } from './on.ts';
+import { IDL } from './idl.ts';
+import { FOUR_U } from './fourU.ts';
+import { PS } from './ps.ts';
+import { PLUS_COLOR } from './pluscolor.ts';
 
 const S = 'https://static.wikia.nocookie.net/tamagotchi/images';
 
@@ -246,6 +252,12 @@ export const VERSIONS: DeviceVersion[] = [
   PARADISE,
   SMART,
   PIX,
+  ON,
+  MIX,
+  IDL,
+  FOUR_U,
+  PS,
+  PLUS_COLOR,
 ];
 
 export function getVersion(id: string): DeviceVersion | undefined {
