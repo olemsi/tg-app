@@ -21,10 +21,8 @@ export function CharacterItem({ character, obtained, onToggle }: CharacterItemPr
         ) : (
           <div className="card-sprite-placeholder" />
         )}
-        <span className="card-name">
-          {character.name}
-          {gender && <span className="card-gender"> {gender}</span>}
-        </span>
+        <span className="card-name">{character.name}</span>
+        {gender && <span className="card-gender">{gender}</span>}
       </button>
       {character.condition && (
         <>
