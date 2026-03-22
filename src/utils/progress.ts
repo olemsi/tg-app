@@ -19,8 +19,8 @@ export function getTotalProgress(categories: Category[], state: CollectionState)
 
 export function getGenderIcon(gender?: string): string {
   switch (gender) {
-    case 'male': return '\u2642\uFE0F';
-    case 'female': return '\u2640\uFE0F';
+    case 'male': return '\u2642';
+    case 'female': return '\u2640';
     case 'both': return '\u2642\u2640';
     default: return '';
   }
