@@ -67,6 +67,112 @@ body {
   color: var(--tg-theme-button-text-color);
 }
 
+/* Chart selector */
+.chart-selector {
+  background: var(--tg-theme-bg-color);
+  border-bottom: 1px solid var(--tg-theme-section-separator-color);
+}
+
+.chart-pills {
+  display: flex;
+  gap: 6px;
+  padding: 8px 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.chart-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.chart-pill {
+  flex-shrink: 0;
+  border: 1.5px solid var(--tg-theme-button-color);
+  background: transparent;
+  color: var(--tg-theme-button-color);
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.chart-pill.active {
+  background: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+}
+
+.chart-pill.chart-add {
+  border-style: dashed;
+  padding: 4px 16px;
+}
+
+.chart-panel {
+  padding: 8px 16px 12px;
+  border-top: 1px solid var(--tg-theme-section-separator-color);
+}
+
+.chart-panel-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chart-prefix {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--tg-theme-hint-color);
+  flex-shrink: 0;
+}
+
+.chart-name-input {
+  flex: 1;
+  min-width: 0;
+  border: 1.5px solid var(--tg-theme-section-separator-color);
+  background: var(--tg-theme-secondary-bg-color);
+  color: var(--tg-theme-text-color);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+
+.chart-name-input:focus {
+  border-color: var(--tg-theme-button-color);
+}
+
+.chart-btn {
+  border: none;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 6px;
+  line-height: 1;
+}
+
+.chart-btn.confirm {
+  color: var(--tg-theme-button-color);
+}
+
+.chart-btn.cancel {
+  color: var(--tg-theme-hint-color);
+}
+
+.chart-danger {
+  display: block;
+  border: none;
+  background: none;
+  color: #e53935;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px 0 0;
+  font-family: inherit;
+}
+
 /* Header */
 .app-header {
   position: sticky;

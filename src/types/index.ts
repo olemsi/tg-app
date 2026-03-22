@@ -23,4 +23,10 @@ export interface DeviceVersion {
   categories: Category[];
 }
 
+export interface Chart {
+  id: string;
+  versionId: string;
+  name: string;
+}
+
 export type CollectionState = Record<string, boolean>;

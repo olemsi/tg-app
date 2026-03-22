@@ -1,15 +1,24 @@
 import { useState } from 'react';
 import { VERSIONS } from './data/characters.ts';
+import { useCharts, getVersionPrefix } from './hooks/useCharts.ts';
 import { useCollection } from './hooks/useCollection.ts';
 import { getTotalProgress } from './utils/progress.ts';
 import { Header } from './components/Header.tsx';
 import { CategoryTabs } from './components/CategoryTabs.tsx';
 import { CategorySection } from './components/CategorySection.tsx';
+import { ChartSelector } from './components/ChartSelector.tsx';
 
 export default function App() {
-  const { collectionState, toggleCharacter, isLoading } = useCollection();
   const [versionId, setVersionId] = useState('uni');
   const [activeTab, setActiveTab] = useState<string | 'all'>('all');
+
+  const {
+    versionCharts, activeChart, storageKey,
+    selectChart, addChart, renameChart, deleteChart,
+    isLoading: chartsLoading,
+  } = useCharts(versionId);
+
+  const { collectionState, toggleCharacter, isLoading: collectionLoading } = useCollection(storageKey);
 
   const version = VERSIONS.find(v => v.id === versionId);
   if (!version) return null;
@@ -20,7 +29,7 @@ export default function App() {
     ? version.categories
     : version.categories.filter(c => c.id === activeTab);
 
-  if (isLoading) {
+  if (chartsLoading || collectionLoading) {
     return <div className="loading">Loading...</div>;
   }
 
@@ -40,7 +49,16 @@ export default function App() {
           ))}
         </div>
       )}
-      <Header obtained={obtained} total={total} title={version.name} />
+      <ChartSelector
+        charts={versionCharts}
+        activeChart={activeChart}
+        prefix={getVersionPrefix(versionId)}
+        onSelect={selectChart}
+        onAdd={addChart}
+        onRename={renameChart}
+        onDelete={deleteChart}
+      />
+      <Header obtained={obtained} total={total} title={activeChart?.name || version.name} />
       <CategoryTabs
         categories={version.categories}
         activeId={activeTab}

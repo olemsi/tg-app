@@ -2,41 +2,67 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import type { CollectionState } from '../types/index.ts';
 import { useCloudStorage } from './useCloudStorage.ts';
 
-const STORAGE_KEY = 'collection';
 const DEBOUNCE_MS = 300;
 
-export function useCollection() {
+/** Merge old gender-split IDs into a single unified ID. */
+const ID_MIGRATIONS: [old: string, unified: string][] = [
+  ['uni-unimarutchi-m', 'uni-unimarutchi'],
+  ['uni-unimarutchi-f', 'uni-unimarutchi'],
+];
+
+function migrateCollection(state: CollectionState): CollectionState {
+  let changed = false;
+  const next = { ...state };
+  for (const [old, unified] of ID_MIGRATIONS) {
+    if (next[old]) {
+      next[unified] = true;
+      delete next[old];
+      changed = true;
+    }
+  }
+  return changed ? next : state;
+}
+
+export function useCollection(storageKey: string) {
   const [state, setState] = useState<CollectionState>({});
   const [isLoading, setIsLoading] = useState(true);
   const { getItem, setItem } = useCloudStorage();
   const saveTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const latestState = useRef(state);
+  const keyRef = useRef(storageKey);
 
   const persist = useCallback((newState: CollectionState) => {
     latestState.current = newState;
     clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(() => {
-      setItem(STORAGE_KEY, JSON.stringify(newState));
+      setItem(keyRef.current, JSON.stringify(newState));
     }, DEBOUNCE_MS);
   }, [setItem]);
 
   const flushSave = useCallback(() => {
     clearTimeout(saveTimer.current);
-    setItem(STORAGE_KEY, JSON.stringify(latestState.current));
+    setItem(keyRef.current, JSON.stringify(latestState.current));
   }, [setItem]);
 
   useEffect(() => {
-    getItem(STORAGE_KEY).then(raw => {
+    // Flush pending save for the previous key before switching
+    if (keyRef.current !== storageKey) {
+      clearTimeout(saveTimer.current);
+      setItem(keyRef.current, JSON.stringify(latestState.current));
+    }
+    keyRef.current = storageKey;
+
+    setIsLoading(true);
+    getItem(storageKey).then(raw => {
+      let parsed: CollectionState = {};
       if (raw) {
-        try {
-          const parsed = JSON.parse(raw);
-          setState(parsed);
-          latestState.current = parsed;
-        } catch { /* ignore corrupt data */ }
+        try { parsed = migrateCollection(JSON.parse(raw)); } catch { /* ignore */ }
       }
+      setState(parsed);
+      latestState.current = parsed;
       setIsLoading(false);
     });
-  }, []);  // eslint-disable-line react-hooks/exhaustive-deps
+  }, [storageKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const handleVisibilityChange = () => {
