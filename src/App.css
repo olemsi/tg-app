@@ -444,6 +444,8 @@ body {
 .card-gender {
   font-size: 10px;
   opacity: 0.5;
+  vertical-align: baseline;
+  line-height: 1;
 }
 
 .character-card.obtained .card-sprite {
