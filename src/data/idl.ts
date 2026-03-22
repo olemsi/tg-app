@@ -38,7 +38,7 @@ export const IDL: DeviceVersion = {
         { id: 'idl-melodytchi', name: 'Melodytchi', gender: 'female', condition: 'From Painaputchi: 2\u20133 CM', sprite: `${S}/9/95/ID-L_Melodytchi.PNG` },
         { id: 'idl-moriritchi', name: 'Moriritchi', gender: 'female', condition: 'From Painaputchi: 4 CM', sprite: `${S}/8/8c/ID-L_Moriritchi.PNG` },
         { id: 'idl-chamametchi', name: 'Chamametchi', gender: 'female', condition: 'From Painaputchi: 5 CM', sprite: `${S}/a/a9/19ChaMametchi.PNG` },
-        { id: 'idl-memetchi', name: 'Memetchi', gender: 'female', condition: 'From Painaputchi: 6+ CM', sprite: `${S}/d/d2/Memetchi_iDL_Ps_4U_Sprite.png` },
+        { id: 'idl-memetchi', name: 'Memetchi', gender: 'female', condition: 'From Painaputchi: 6+ CM', sprite: `${S}/f/fe/Memetchi_iDL_Ps_4U_Sprite.png` },
         { id: 'idl-perotchi', name: 'Perotchi', gender: 'female', condition: 'From Sabosabotchi: 0\u20131 CM', sprite: `${S}/8/88/Perotchi_id_l_sprite.png` },
         { id: 'idl-shigurehimetchi', name: 'Shigurehimetchi', gender: 'female', condition: 'From Sabosabotchi: 2\u20133 CM', sprite: `${S}/0/07/ID-L-15_shigurehimetchi.png` },
         { id: 'idl-makiko', name: 'Makiko', gender: 'female', condition: 'From Sabosabotchi: 4 CM', sprite: `${S}/e/e3/MakikoiDL.png` },
