@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Category, CollectionState } from '../types/index.ts';
 import { getCategoryProgress } from '../utils/progress.ts';
 import { ProgressBar } from './ProgressBar.tsx';
@@ -11,6 +12,7 @@ interface CategorySectionProps {
 
 export function CategorySection({ category, collectionState, onToggle }: CategorySectionProps) {
   const { obtained, total } = getCategoryProgress(category, collectionState);
+  const [showGuide, setShowGuide] = useState(false);
 
   return (
     <section className="category-section">
@@ -19,9 +21,9 @@ export function CategorySection({ category, collectionState, onToggle }: Categor
           {category.emoji} {category.name}
         </span>
         {category.guideUrl && (
-          <a href={category.guideUrl} target="_blank" rel="noopener noreferrer" className="category-guide">
+          <button type="button" className="category-guide" onClick={() => setShowGuide(true)}>
             Guide
-          </a>
+          </button>
         )}
         <ProgressBar obtained={obtained} total={total} />
       </div>
@@ -35,6 +37,13 @@ export function CategorySection({ category, collectionState, onToggle }: Categor
           />
         ))}
       </div>
+      {showGuide && category.guideUrl && (
+        <div className="guide-overlay" onClick={() => setShowGuide(false)}>
+          <div className="guide-viewer">
+            <img src={category.guideUrl} alt="Growth guide" />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
