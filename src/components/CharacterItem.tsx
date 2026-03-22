@@ -13,35 +13,32 @@ export function CharacterItem({ character, obtained, onToggle }: CharacterItemPr
   const gender = getGenderIcon(character.gender);
 
   return (
-    <div className={`character-item ${obtained ? 'obtained' : ''}`}>
-      <button type="button" className="character-row" onClick={onToggle}>
-        <span className="character-check">{obtained ? '\u2705' : '\u2B1C'}</span>
-        {character.sprite && (
-          <img
-            src={character.sprite}
-            alt=""
-            className="character-sprite"
-            loading="lazy"
-          />
+    <div className={`character-card${obtained ? ' obtained' : ''}`}>
+      <button type="button" className="card-toggle" onClick={onToggle}>
+        {obtained && <span className="card-check">&#x2713;</span>}
+        {character.sprite ? (
+          <img src={character.sprite} alt="" className="card-sprite" loading="lazy" />
+        ) : (
+          <div className="card-sprite-placeholder" />
         )}
-        <span className="character-name">
+        <span className="card-name">
           {character.name}
-          {gender && <span className="character-gender"> {gender}</span>}
+          {gender && <span className="card-gender"> {gender}</span>}
         </span>
       </button>
       {character.condition && (
-        <button
-          type="button"
-          className="character-info-btn"
-          onClick={() => setShowCondition(!showCondition)}
-        >
-          {showCondition ? '\u25B2' : '\u2139\uFE0F'}
-        </button>
-      )}
-      {showCondition && character.condition && (
-        <div className="character-condition">
-          {character.condition}
-        </div>
+        <>
+          {showCondition && (
+            <div className="card-condition">{character.condition}</div>
+          )}
+          <button
+            type="button"
+            className="card-info"
+            onClick={() => setShowCondition(!showCondition)}
+          >
+            {showCondition ? '\u25B2' : '\u2139\uFE0F'}
+          </button>
+        </>
       )}
     </div>
   );
