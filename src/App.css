@@ -42,9 +42,7 @@ body {
 /* Version dropdown */
 .version-dropdown {
   position: relative;
-  background: var(--tg-theme-bg-color);
-  border-bottom: 1px solid var(--tg-theme-section-separator-color);
-  padding: 8px 16px;
+  padding: 8px 16px 0;
 }
 
 .version-toggle {
@@ -110,8 +108,6 @@ body {
 
 /* Chart selector */
 .chart-selector {
-  background: var(--tg-theme-bg-color);
-  border-bottom: 1px solid var(--tg-theme-section-separator-color);
 }
 
 .chart-pills {
@@ -214,14 +210,17 @@ body {
   font-family: inherit;
 }
 
-/* Header */
-.app-header {
+/* Sticky header group */
+.app-sticky-header {
   position: sticky;
   top: 0;
   z-index: 10;
   background: var(--tg-theme-bg-color);
-  padding: 16px;
-  border-bottom: 1px solid var(--tg-theme-section-separator-color);
+}
+
+/* Header */
+.app-header {
+  padding: 8px 16px;
 }
 
 .app-title {
@@ -273,12 +272,8 @@ body {
 
 /* Tabs */
 .tabs-container {
-  position: sticky;
-  top: 79px;
-  z-index: 9;
   background: var(--tg-theme-bg-color);
-  margin: 0 8px;
-  border-radius: 0 0 12px 12px;
+  border-bottom: 1px solid var(--tg-theme-section-separator-color);
 }
 
 .tabs {

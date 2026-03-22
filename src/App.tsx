@@ -58,48 +58,50 @@ export default function App() {
 
   return (
     <div className="app">
-      {VERSIONS.length > 1 && (
-        <div className="version-dropdown" ref={dropdownRef}>
-          <button
-            type="button"
-            className="version-toggle"
-            onClick={() => setVersionOpen(!versionOpen)}
-          >
-            <span className="version-toggle-name">{version.name}</span>
-            <span className={`version-chevron${versionOpen ? ' open' : ''}`}>&#x25BE;</span>
-          </button>
-          {versionOpen && (
-            <div className="version-menu">
-              {VERSIONS.map(v => (
-                <button
-                  key={v.id}
-                  type="button"
-                  className={`version-menu-item${v.id === versionId ? ' active' : ''}`}
-                  onClick={() => { setVersionId(v.id); setActiveTab('all'); setVersionOpen(false); }}
-                >
-                  {v.name}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-      <ChartSelector
-        charts={versionCharts}
-        activeChart={activeChart}
-        prefix={getVersionPrefix(versionId)}
-        onSelect={selectChart}
-        onAdd={addChart}
-        onRename={renameChart}
-        onDelete={deleteChart}
-      />
-      <Header obtained={obtained} total={total} title={activeChart?.name || version.name} />
-      <CategoryTabs
-        categories={version.categories}
-        activeId={validTab}
-        onSelect={setActiveTab}
-        collectionState={collectionState}
-      />
+      <div className="app-sticky-header">
+        {VERSIONS.length > 1 && (
+          <div className="version-dropdown" ref={dropdownRef}>
+            <button
+              type="button"
+              className="version-toggle"
+              onClick={() => setVersionOpen(!versionOpen)}
+            >
+              <span className="version-toggle-name">{version.name}</span>
+              <span className={`version-chevron${versionOpen ? ' open' : ''}`}>&#x25BE;</span>
+            </button>
+            {versionOpen && (
+              <div className="version-menu">
+                {VERSIONS.map(v => (
+                  <button
+                    key={v.id}
+                    type="button"
+                    className={`version-menu-item${v.id === versionId ? ' active' : ''}`}
+                    onClick={() => { setVersionId(v.id); setActiveTab('all'); setVersionOpen(false); }}
+                  >
+                    {v.name}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+        <ChartSelector
+          charts={versionCharts}
+          activeChart={activeChart}
+          prefix={getVersionPrefix(versionId)}
+          onSelect={selectChart}
+          onAdd={addChart}
+          onRename={renameChart}
+          onDelete={deleteChart}
+        />
+        <Header obtained={obtained} total={total} title={activeChart?.name || version.name} />
+        <CategoryTabs
+          categories={version.categories}
+          activeId={validTab}
+          onSelect={setActiveTab}
+          collectionState={collectionState}
+        />
+      </div>
       <main className="content">
         {visibleCategories.map(cat => (
           <CategorySection
